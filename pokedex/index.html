@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="data image">
+        <img id="sprite" src="pokeball.png" alt="sprite pokemon" />
+      </div>
+      <div class="data stats">
+        <div class="stat">
+          <span id="number"></span>
+          <span id="name"></span>
+          <span id="height"> </span>
+          <span id="weight"> </span>
+          <span class="divider"></span>
+          <div id="statistics"></div>
+        </div>
+      </div>
+      <div class="data">
+        <form id="formData">
+          <input id="search" type="text" />
+          <div id="logic">
+            <button type="button" id="left" class="arrow left">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 25 25"
+                width="16"
+                height="16"
+              >
+                <path
+                  style="fill: currentColor"
+                  d="M24 12.001H2.914l5.294-5.295-.707-.707L1 12.501l6.5 6.5.707-.707-5.293-5.293H24v-1z"
+                />
+              </svg>
+            </button>
+
+            <button id="submit" type="submit">Rechercher</button>
+            <button id="right" type="button" class="arrow right">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 25 25"
+                width="16"
+                height="16"
+              >
+                <path
+                  style="fill: currentColor"
+                  d="m17.5 5.999-.707.707 5.293 5.293H1v1h21.086l-5.294 5.295.707.707L24 12.499l-6.5-6.5z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="data skills">
+        <span>Skills</span>
+        <div id="skills"></div>
+      </div>
+    </div>
+  </body>
+  <script src="main.js"></script>
+</html>
