@@ -1,5 +1,6 @@
 import { connection } from "../database.js";
 import { Router } from "express";
+import bcrypt from "bcrypt";
 
 const router = Router();
 
@@ -27,16 +28,31 @@ router.get("/user/:id", (req, res) => {
 
 router.post("/user", (req, res) => {
   const { username, password, email } = req.body;
-  const query =
-    "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-  connection.query(query, [username, password, email], (err) => {
+  if (!username || !password || !email) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  const saltRounds = 10;
+
+  bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) {
-      console.error("Error inserting user:", err);
+      console.error("Error hashing password:", err);
       return res.status(500).json({ error: "Internal Server Error" });
     }
-    res
-      .status(201)
-      .json({ message: "User created !", username, password, email });
+
+    const query =
+      "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+
+    connection.query(query, [username, hash, email], (err) => {
+      if (err) {
+        console.error("Error inserting user:", err);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+
+      res
+        .status(201)
+        .json({ message: "User created !", username, hash, email });
+    });
   });
 });
 
